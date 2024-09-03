@@ -1,0 +1,200 @@
+app:
+  description: ''
+  icon: 🤖
+  icon_background: '#FFEAD5'
+  mode: workflow
+  name: test
+  use_icon_as_answer_icon: false
+kind: app
+version: 0.1.1
+workflow:
+  conversation_variables: []
+  environment_variables: []
+  features:
+    file_upload:
+      image:
+        enabled: false
+        number_limits: 3
+        transfer_methods:
+        - local_file
+        - remote_url
+    opening_statement: ''
+    retriever_resource:
+      enabled: true
+    sensitive_word_avoidance:
+      enabled: false
+    speech_to_text:
+      enabled: false
+    suggested_questions: []
+    suggested_questions_after_answer:
+      enabled: false
+    text_to_speech:
+      enabled: false
+      language: ''
+      voice: ''
+  graph:
+    edges:
+    - data:
+        isInIteration: false
+        sourceType: start
+        targetType: tool
+      id: 1725323804859-source-1725323836921-target
+      source: '1725323804859'
+      sourceHandle: source
+      target: '1725323836921'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        sourceType: tool
+        targetType: llm
+      id: 1725323836921-source-1725324177323-target
+      source: '1725323836921'
+      sourceHandle: source
+      target: '1725324177323'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        sourceType: llm
+        targetType: end
+      id: 1725324177323-source-1725324256739-target
+      source: '1725324177323'
+      sourceHandle: source
+      target: '1725324256739'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    nodes:
+    - data:
+        desc: ''
+        selected: true
+        title: 開始
+        type: start
+        variables:
+        - label: input
+          max_length: 48
+          options: []
+          required: true
+          type: text-input
+          variable: input
+      height: 90
+      id: '1725323804859'
+      position:
+        x: 46.98650300393041
+        y: 100.77577582342096
+      positionAbsolute:
+        x: 46.98650300393041
+        y: 100.77577582342096
+      selected: true
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        desc: ''
+        provider_id: tavily
+        provider_name: tavily
+        provider_type: builtin
+        selected: false
+        title: TavilySearch
+        tool_configurations:
+          exclude_domains: null
+          include_answer: null
+          include_domains: https://www.cwa.gov.tw/V8/C/W/County/index.html
+          include_images: 1
+          include_raw_content: null
+          max_results: 5
+          search_depth: basic
+        tool_label: TavilySearch
+        tool_name: tavily_search
+        tool_parameters:
+          query:
+            type: mixed
+            value: '{{#1725323804859.input#}}'
+        type: tool
+      height: 246
+      id: '1725323836921'
+      position:
+        x: 365.1386215280305
+        y: 100.77577582342096
+      positionAbsolute:
+        x: 365.1386215280305
+        y: 100.77577582342096
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        context:
+          enabled: true
+          variable_selector: []
+        desc: ''
+        model:
+          completion_params:
+            frequency_penalty: 0.5
+            presence_penalty: 0.5
+            temperature: 0.2
+            top_p: 0.75
+          mode: chat
+          name: 
+          provider: 
+        prompt_template:
+        - id: 20634425-cc69-48ee-8b84-27dbb3e9a0f4
+          role: system
+          text: '資料：{{#1725323836921.text#}}
+
+            問題：{{#1725323804859.input#}}
+
+            根據資料回答問題。'
+        selected: false
+        title: LLM
+        type: llm
+        variables: []
+        vision:
+          configs:
+            detail: high
+          enabled: true
+      height: 98
+      id: '1725324177323'
+      position:
+        x: 665.582051675559
+        y: 100.77577582342096
+      positionAbsolute:
+        x: 665.582051675559
+        y: 100.77577582342096
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        desc: ''
+        outputs:
+        - value_selector:
+          - '1725324177323'
+          - text
+          variable: output
+        selected: false
+        title: 結束
+        type: end
+      height: 90
+      id: '1725324256739'
+      position:
+        x: 968.3915710753239
+        y: 100.77577582342096
+      positionAbsolute:
+        x: 968.3915710753239
+        y: 100.77577582342096
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    viewport:
+      x: 50.06872818869766
+      y: 129.37191167885146
+      zoom: 0.6079754185531092
